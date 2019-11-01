@@ -4,13 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="css/index.css" />
-    <title>Herbhub</title>
+    <title>MY_PALETTE</title>
   </head>
   <body>
-    <div class="index-back"></div>
-    <div class="index-back2"></div>
-    <div class="index-back3"></div>
-    <h1 class="index-title">MyPalette<strong>마이팔레트</strong></h1>
+    <div class="bg"></div>
+    <div class="bg2"></div>
+    <div class="bg3"></div>
+    <h1 class="index-title">MyPalette<strong> 마이팔레트</strong></h1>
     <div class="index-nav">
       <button class="index-nav-item index-nav-code">
         <svg>
@@ -76,10 +76,10 @@
         <a class="index-color-add-btn" href="#">추가하기</a>
       </li>
     </ul>
-    <div class="index-code-box-contain">
+    <div class="index-code-box-contain hide-box">
       <div class="index-code-box-item">This is Code Area</div>
     </div>
-    <div class="index-add-color-modal">
+    <div class="index-add-color-modal hide-add-modal">
       <h1 class="index-add-clor-modal-banner">색상 추가</h1>
       <a href="#" class="index-add-color-modal-close">닫기</a>
       <div class="index-add-color-modal-div-title">
@@ -95,6 +95,35 @@
       </div>
       <div class="index-add-color-modal-save">
         <a href="#">저장</a>
+      </div>
+    </div>
+    <div class="index-update-color-modal hide-update-modal">
+      <h1 class="index-update-color-modal-banner">색상 수정</h1>
+      <div class="index-update-color-modal-old">
+        <div class="index-update-color-modal-circle"></div>
+        <span class="index-update-color-modal-title"></span>
+        <span class="index-update-color-modal-code"></span>
+      </div>
+      <div class="index-update-color-modal-arrow">
+        <span>-></span>
+        <span>-></span>
+      </div>
+      <div class="index-update-color-modal-new">
+        <div class="index-update-color-modal-circle-new"></div>
+        <span class="index-update-color-modal-title-new"></span>
+        <span class="index-update-color-modal-code-new"></span>
+        <div>
+          <span class="index-update-color-modal-span">색상 타이틀</span
+          ><input type="text" class="index-update-color-modal-title-input" />
+        </div>
+        <div>
+          <span class="index-update-color-modal-span">색상 코드</span
+          ><input type="text" class="index-update-color-modal-code-input" />
+        </div>
+      </div>
+      <div class="index-update-color-modal-btn-div">
+        <a class="index-update-color-modal-save" href="#">완료</a>
+        <a class="index-update-color-modal-cancel" href="#">취소</a>
       </div>
     </div>
     <script src="js/index.js"></script>
