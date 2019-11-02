@@ -22,6 +22,20 @@ body {
   background-size: 400% 400%;
 }
 
+input {
+  all: unset;
+  padding: 5px;
+  border: 1px solid #3a4551;
+  background-color: #f2eef7;
+  transition: all 0.2s;
+  color: #3a4551;
+}
+
+input:focus {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transform: scale(1.03);
+}
+
 a {
   all: unset;
   background: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
@@ -234,6 +248,7 @@ li {
   opacity: 1;
   height: 40%;
   display: flex;
+  overflow: hidden;
 }
 
 .index-add-color-modal-div-title {
@@ -334,6 +349,7 @@ li {
   /* display: none; For Use Folding Animation, Comment this line */
   transition: all 0.2s;
   width: 45%;
+  visibility: hidden;
 }
 
 .index-update-color-modal {
@@ -353,6 +369,7 @@ li {
   animation: gradientTransition 6s ease infinite;
   background-size: 300% 300%;
   transition: all 0.5s;
+  overflow: hidden;
 }
 
 .index-update-color-modal-old {
@@ -365,14 +382,22 @@ li {
 }
 
 .index-update-color-modal-arrow {
+  width: 5%;
+  height: 5%;
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   left: 50%;
-  transform: translateX(-50%);
-  top: 55%;
+  transform: translateX(-50%) rotate(180deg);
+  top: 50%;
+  fill: #f2eef7;
+  stroke: #fff;
+  stroke-width: 15;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  stroke-opacity: 0;
+  animation: strokeFillAnimation 3s ease-in-out infinite alternate-reverse;
+  fill-opacity: 1;
 }
+
 .index-update-color-modal-new {
   position: absolute;
   display: flex;
@@ -440,6 +465,8 @@ li {
   opacity: 0;
   transform: scale(0.7);
   transition: width 2s opacity 0.1s transofrm 2s;
+  padding: 0;
+  visibility: none;
 }
 
 .index-update-color-modal-span {
@@ -465,5 +492,16 @@ li {
   }
   to {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes strokeFillAnimation {
+  100% {
+    stroke-dashoffset: 0;
+    stroke-width: 10;
+    stroke-opacity: 1;
+    transform: rotate(180deg) translateX(150%);
+    fill: none;
+    fill-opacity: 0;
   }
 }
