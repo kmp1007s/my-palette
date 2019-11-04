@@ -18,8 +18,8 @@ html {
 body {
   background-color: #7f53ac;
   background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
-  animation: gradientTransition 6s ease infinite;
   background-size: 400% 400%;
+  animation: bgGradient 6s ease infinite;
 }
 
 input {
@@ -63,7 +63,7 @@ li {
   list-style: none;
 }
 
-.index-title {
+.banner {
   color: #f2eef7;
   margin-top: 15px;
   text-align: center;
@@ -74,13 +74,13 @@ li {
   text-transform: uppercase;
 }
 
-.index-nav {
+.nav {
   padding: 15px;
   display: flex;
   justify-content: left;
 }
 
-.index-nav-item {
+.nav-item {
   all: unset;
   position: relative;
   padding: 20 30 20 30px;
@@ -90,12 +90,12 @@ li {
   border-radius: 3px;
 }
 
-.index-nav-item:hover {
+.nav-item:hover {
   font-weight: bold;
 }
 
-.index-nav-item svg,
-.index-nav-item svg rect {
+.nav-item svg,
+.nav-item svg rect {
   position: absolute;
   top: 0;
   left: 0;
@@ -104,7 +104,7 @@ li {
   fill: transparent;
 }
 
-.index-nav-item svg rect {
+.nav-item svg rect {
   stroke-opacity: 0.7;
   stroke: #fff;
   stroke-width: 2;
@@ -114,11 +114,10 @@ li {
   stroke-linecap: round;
 }
 
-.index-nav-item:hover svg rect {
+/* .nav-item:hover svg rect {
   stroke-dasharray: 500;
-  /* stroke-dashoffset: 0; */
   animation: dash 1s ease-in alternate infinite;
-}
+} */
 
 .bg {
   position: absolute;
@@ -159,8 +158,8 @@ li {
   transform: skew(-89deg, -34deg);
 }
 
-.index-color-box-contain,
-.index-code-box-contain {
+.color-box-list,
+.code-box-list {
   display: flex;
   width: 90%;
   height: 72%;
@@ -176,9 +175,10 @@ li {
   flex-wrap: wrap;
   padding: 17px;
   border-radius: 4px;
+  animation: scaleAni 1s ease;
 }
 
-.index-color-box-item {
+.color-box-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,9 +191,10 @@ li {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 4px;
   margin: 10px;
+  animation: scaleAni 1s ease;
 }
 
-.index-color-box-item-circle {
+.color-box-item-circle {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -202,33 +203,33 @@ li {
   transition: all 1s;
 }
 
-.index-color-box-item-circle:hover {
+.color-box-item-circle:hover {
   cursor: pointer;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.index-color-box-item-circle:active {
+.color-box-item-circle:active {
   transform: scale(1.06);
 }
 
-.index-color-box-title {
+.color-box-title {
   font-weight: bold;
   font-size: 1.16rem;
   margin-bottom: 3px;
 }
 
-.index-color-box-color-code {
+.color-box-color-code {
   color: #3a4551;
   letter-spacing: 2px;
   font-weight: 200;
   margin-bottom: 7px;
 }
 
-.index-color-box-update-btn {
+.color-box-update-btn {
   margin-right: 20px;
 }
 
-.index-color-box-item-add {
+.add-box {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -238,7 +239,7 @@ li {
   border-radius: 50%;
 }
 
-.index-add-color-modal {
+.add-color-modal {
   width: 30%;
   position: absolute;
   background-color: #f2eef7;
@@ -257,19 +258,19 @@ li {
   overflow: hidden;
 }
 
-.index-add-color-modal-div-title {
+.add-color-modal-title-div {
   position: absolute;
   top: 42%;
   margin: 30px;
 }
 
-.index-add-color-modal-div-color {
+.add-color-modal-color-div {
   position: absolute;
   top: 55%;
   margin: 30px;
 }
 
-.index-add-color-modal-span {
+.add-color-modal-span {
   display: inline-block;
   width: 120px;
   text-align: left;
@@ -277,29 +278,29 @@ li {
   font-weight: 200;
 }
 
-.index-add-color-modal-title,
-.index-add-color-modal-code {
+.add-color-modal-title,
+.add-color-modal-code {
   vertical-align: middle;
 }
 
-.index-add-color-modal-close {
+.add-color-modal-close {
   position: absolute;
   right: 5%;
   top: 5%;
 }
 
-.index-add-color-modal-save {
+.add-color-modal-save {
   position: absolute;
   bottom: 5%;
 }
 
-.index-add-clor-modal-banner {
+.add-color-modal-banner {
   color: #3a4551;
   position: absolute;
   top: 10%;
 }
 
-.index-add-color-modal-notice {
+.add-color-modal-notice {
   display: block;
   position: absolute;
   border-radius: 6px;
@@ -315,11 +316,11 @@ li {
   -webkit-text-fill-color: transparent;
 }
 
-.index-color-box-item-add-icon {
+.add-icon {
   fill: gray;
   transition: all 0.7s;
 }
-.index-color-box-item-add-icon:hover {
+.add-icon:hover {
   fill: url(#purpleGradient);
   transform: scale(1.1);
   cursor: pointer;
@@ -346,7 +347,7 @@ li {
   transition: all 0.5s;
 }
 
-.hide-box {
+.hide-list {
   display: none;
 }
 
@@ -359,7 +360,7 @@ li {
   visibility: hidden;
 }
 
-.index-update-color-modal {
+.update-color-modal {
   position: absolute;
   width: 50%;
   height: 50%;
@@ -373,13 +374,13 @@ li {
   background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
   color: #f2eef7;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  animation: gradientTransition 6s ease infinite;
+  animation: bgGradient 6s ease infinite;
   background-size: 300% 300%;
   transition: all 0.5s;
   overflow: hidden;
 }
 
-.index-update-color-modal-old {
+.update-color-modal-old {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -388,7 +389,7 @@ li {
   top: 40%;
 }
 
-.index-update-color-modal-arrow {
+.update-color-modal-arrow {
   width: 5%;
   height: 5%;
   position: absolute;
@@ -401,11 +402,11 @@ li {
   stroke-dasharray: 2000;
   stroke-dashoffset: 2000;
   stroke-opacity: 0;
-  animation: strokeFillAnimation 3s ease-in-out infinite alternate-reverse;
+  animation: strokeFillAni 3s ease-in-out infinite alternate-reverse;
   fill-opacity: 1;
 }
 
-.index-update-color-modal-new {
+.update-color-modal-new {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -414,7 +415,7 @@ li {
   top: 40%;
 }
 
-.index-update-color-modal-banner {
+.update-color-modal-banner {
   position: relative;
   text-align: center;
   color: #f2eef7;
@@ -424,26 +425,26 @@ li {
   padding-bottom: 50px;
 }
 
-.index-update-color-modal-btn-div {
+.update-color-modal-btn-div {
   position: absolute;
   top: 80%;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.index-update-color-modal-save,
-.index-update-color-modal-cancel {
+.update-color-modal-save,
+.update-color-modal-cancel {
   color: #f2eef7;
   -webkit-text-fill-color: #f2eef7;
   text-decoration: underline;
 }
 
-.index-update-color-modal-save {
+.update-color-modal-save {
   margin-right: 10px;
 }
 
-.index-update-color-modal-circle,
-.index-update-color-modal-circle-new {
+.update-color-modal-circle,
+.update-color-modal-circle-new {
   width: 100px;
   height: 100px;
   background-color: #f2eef7;
@@ -452,14 +453,14 @@ li {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.index-update-color-modal-title,
-.index-update-color-modal-title-new {
+.update-color-modal-title,
+.update-color-modal-title-new {
   display: inline-block;
   margin-bottom: 10px;
 }
 
-.index-update-color-modal-code,
-.index-update-color-modal-code-new {
+.update-color-modal-code,
+.update-color-modal-code-new {
   display: inline-block;
   margin-bottom: 30px;
   letter-spacing: 2px;
@@ -476,12 +477,12 @@ li {
   visibility: none;
 }
 
-.index-update-color-modal-span {
+.update-color-modal-span {
   display: inline-block;
   width: 100px;
 }
 
-@keyframes gradientTransition {
+@keyframes bgGradient {
   0% {
     background-position: 0% 50%;
   }
@@ -493,16 +494,16 @@ li {
   }
 }
 
-@keyframes dash {
+/* @keyframes dash {
   from {
     stroke-dashoffset: 500;
   }
   to {
     stroke-dashoffset: 0;
   }
-}
+} */
 
-@keyframes strokeFillAnimation {
+@keyframes strokeFillAni {
   100% {
     stroke-dashoffset: 0;
     stroke-width: 10;
@@ -510,5 +511,12 @@ li {
     transform: rotate(180deg) translateX(150%);
     fill: none;
     fill-opacity: 0;
+  }
+}
+
+@keyframes scaleAni {
+  from {
+    opacity: 0;
+    transform: scale(2);
   }
 }

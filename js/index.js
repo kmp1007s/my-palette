@@ -1,25 +1,13 @@
 let isColorModalShowing = false; //색상 추가 모달의 가시 여부
 
-const navCode = document.querySelector(".index-nav-code"); // 코드모음
-const navColor = document.querySelector(".index-nav-color"); // 색상모음
+// const navCode = document.querySelector(".nav-code"); // 코드모음
+const navColor = document.querySelector(".nav-color"); // 색상모음
 
-const colorModal = document.querySelector(".index-add-color-modal"); // 색상 추가 모달
+const addColorModal = document.querySelector(".add-color-modal"); // 색상 추가 모달
+const updateColorModal = document.querySelector(".update-color-modal"); // 색상 업데이트 모달
 
-const codeBoxContain = document.querySelector(".index-code-box-contain"); // 코드 박스
-const colorBoxContain = document.querySelector(".index-color-box-contain"); // 색상 박스
-
-// 색상리스트 감싸는 ul
-const lstColorParent = document.getElementsByClassName(
-  "index-color-box-contain"
-)[0];
-
-const updateColorModal = document.querySelector(".index-update-color-modal"); // 색상 업데이트 모달
-const updateColorModalSaveBtn = document.querySelector(
-  ".index-update-color-modal-save"
-);
-const updateColorModalCancelBtn = document.querySelector(
-  ".index-update-color-modal-cancel"
-);
+const lstCodeParent = document.querySelector(".code-box-list"); // 코드리스트 감싸는 ul
+const lstColorParent = document.querySelector(".color-box-list"); // 색상리스트 감싸는 ul
 
 window.addEventListener("load", windowLoaded);
 window.addEventListener("keyup", windowKeyUp);
@@ -30,10 +18,8 @@ function windowKeyUp(e) {
     if (e.keyCode == 27) closeColorModal();
     //Enter
     if (e.keyCode == 13) {
-      const title = document.getElementById("index-add-color-modal-title")
-        .value;
-      const colorCode = document.getElementById("index-add-color-modal-code")
-        .value;
+      const title = document.getElementById("add-color-modal-title").value;
+      const colorCode = document.getElementById("add-color-modal-code").value;
 
       addNewColor(title, colorCode);
     }
@@ -41,30 +27,37 @@ function windowKeyUp(e) {
 }
 
 function windowLoaded(e) {
-  const addColorTxt = document.querySelector(".index-color-add-btn"); // 색상 추가 텍스트
-  const addColorIcon = document.querySelector(".index-color-box-item-add-icon"); // 색상 추가 아이콘
+  const addColorTxt = document.querySelector(".add-txt"); // 색상 추가 텍스트
+  const addColorIcon = document.querySelector(".add-icon"); // 색상 추가 아이콘
 
-  const colorModalSaveBtn = document.querySelector(
-    ".index-add-color-modal-save"
-  ); // 색상 추가 버튼
+  const colorModalSaveBtn = document.querySelector(".add-color-modal-save"); // 색상 추가 버튼
   const colorModalCloseBtn = document.querySelector(
     //색상 추가 모달 종료 버튼
-    ".index-add-color-modal-close"
+    ".add-color-modal-close"
+  );
+
+  const updateColorModalSaveBtn = document.querySelector(
+    //색상 수정 모달 완료 버튼
+    ".update-color-modal-save"
+  );
+  const updateColorModalCancelBtn = document.querySelector(
+    //색상 수정 모달 취소 버튼
+    ".update-color-modal-cancel"
   );
 
   const updateInputTitle = document.querySelector(
     //업데이트 색상 타이틀
-    ".index-update-color-modal-title-input"
+    ".update-color-modal-title-input"
   );
   const updateInputCode = document.querySelector(
     //업데이트 색상 코드
-    ".index-update-color-modal-code-input"
+    ".update-color-modal-code-input"
   );
 
   initUI();
 
-  navCode.addEventListener("click", toggleColorOrCode);
-  navColor.addEventListener("click", toggleColorOrCode);
+  // navCode.addEventListener("click", toggleColorOrCode);
+  // navColor.addEventListener("click", toggleColorOrCode);
 
   addColorTxt.addEventListener("click", showColorModal);
   addColorIcon.addEventListener("click", showColorModal);
@@ -72,44 +65,35 @@ function windowLoaded(e) {
   colorModalCloseBtn.addEventListener("click", closeColorModal);
 
   colorModalSaveBtn.addEventListener("click", e => {
-    const title = document.getElementById("index-add-color-modal-title").value;
-    const colorCode = document.getElementById("index-add-color-modal-code")
-      .value;
+    const title = document.getElementById("add-color-modal-title").value;
+    const colorCode = document.getElementById("add-color-modal-code").value;
 
     addNewColor(title, colorCode);
   });
 
   updateInputTitle.addEventListener("keyup", e => {
-    const newTitle = document.querySelector(
-      ".index-update-color-modal-title-new"
-    );
+    const newTitle = document.querySelector(".update-color-modal-title-new");
 
     newTitle.innerHTML = e.target.value;
   });
 
   updateInputCode.addEventListener("keyup", e => {
-    const newCircle = document.querySelector(
-      ".index-update-color-modal-circle-new"
-    );
-    const newCode = document.querySelector(
-      ".index-update-color-modal-code-new"
-    );
+    const newCircle = document.querySelector(".update-color-modal-circle-new");
+    const newCode = document.querySelector(".update-color-modal-code-new");
 
     newCircle.style.backgroundColor = e.target.value;
     newCode.innerHTML = e.target.value;
   });
 
   updateColorModalSaveBtn.addEventListener("click", e => {
-    const oldTitle = document.querySelector(".index-update-color-modal-title")
+    const oldTitle = document.querySelector(".update-color-modal-title")
       .innerHTML;
 
-    const newTitle = document.querySelector(
-      ".index-update-color-modal-title-input"
-    ).value;
+    const newTitle = document.querySelector(".update-color-modal-title-input")
+      .value;
 
-    const newCode = document.querySelector(
-      ".index-update-color-modal-code-input"
-    ).value;
+    const newCode = document.querySelector(".update-color-modal-code-input")
+      .value;
 
     updateColor(e, oldTitle, newTitle, newCode);
   });
@@ -123,12 +107,12 @@ function initUI() {
   loadColors();
 }
 
-function toggleColorOrCode() {
-  navColor.classList.toggle("selected-nav");
-  navCode.classList.toggle("selected-nav");
-  colorBoxContain.classList.toggle("hide-box");
-  codeBoxContain.classList.toggle("hide-box");
-}
+// function toggleColorOrCode() {
+//   navColor.classList.toggle("selected-nav");
+//   navCode.classList.toggle("selected-nav");
+//   lstColorParent.classList.toggle("hide-list");
+//   lstCodeParent.classList.toggle("hide-list");
+// }
 
 function loadColors() {
   let colors = [];
@@ -207,10 +191,10 @@ function insertColor(colorTitle, colorCode) {
 
 function createNewColor(colorTitle, colorCode) {
   const newColor = document.createElement("li");
-  newColor.className = "index-color-box-item";
+  newColor.className = "color-box-item";
 
   const newCircle = document.createElement("div");
-  newCircle.className = "index-color-box-item-circle";
+  newCircle.className = "color-box-item-circle";
   newCircle.style.backgroundColor = colorCode;
   newCircle.addEventListener("click", e => {
     colorCircleClicked(e, colorCode);
@@ -218,16 +202,16 @@ function createNewColor(colorTitle, colorCode) {
 
   const newTitle = document.createElement("div");
   newTitle.innerHTML = colorTitle;
-  newTitle.className = "index-color-box-title";
+  newTitle.className = "color-box-title";
 
   const newCode = document.createElement("div");
   newCode.innerHTML = colorCode;
-  newCode.className = "index-color-box-color-code";
+  newCode.className = "color-box-color-code";
 
   const newUpdateBtn = document.createElement("a");
   newUpdateBtn.href = "#";
   newUpdateBtn.innerHTML = "수정";
-  newUpdateBtn.className = "index-color-box-update-btn";
+  newUpdateBtn.className = "color-box-update-btn";
   newUpdateBtn.addEventListener("click", e => {
     showUpdateColorModal(colorTitle, colorCode);
   });
@@ -257,17 +241,13 @@ function createNewColor(colorTitle, colorCode) {
 }
 
 function showUpdateColorModal(colorTitle, colorCode) {
-  const oldTitle = document.querySelector(".index-update-color-modal-title");
-  const oldCode = document.querySelector(".index-update-color-modal-code");
-  const oldCircle = document.querySelector(".index-update-color-modal-circle");
+  const oldTitle = document.querySelector(".update-color-modal-title");
+  const oldCode = document.querySelector(".update-color-modal-code");
+  const oldCircle = document.querySelector(".update-color-modal-circle");
 
-  const newTitle = document.querySelector(
-    ".index-update-color-modal-title-new"
-  );
-  const newCode = document.querySelector(".index-update-color-modal-code-new");
-  const newCircle = document.querySelector(
-    ".index-update-color-modal-circle-new"
-  );
+  const newTitle = document.querySelector(".update-color-modal-title-new");
+  const newCode = document.querySelector(".update-color-modal-code-new");
+  const newCircle = document.querySelector(".update-color-modal-circle-new");
 
   focusOn(updateColorModal);
   updateColorModal.classList.toggle("hide-update-modal");
@@ -304,12 +284,8 @@ function updateColor(e, oldTitle, newTitle, newCode) {
 }
 
 function hideColorUpdateModal() {
-  const inputTitle = document.querySelector(
-    ".index-update-color-modal-title-input"
-  );
-  const inputCode = document.querySelector(
-    ".index-update-color-modal-code-input"
-  );
+  const inputTitle = document.querySelector(".update-color-modal-title-input");
+  const inputCode = document.querySelector(".update-color-modal-code-input");
 
   inputTitle.value = "";
   inputCode.value = "";
@@ -333,21 +309,21 @@ function removeColor(e, colorTitle) {
 
 function showColorModal() {
   isColorModalShowing = true;
-  focusOn(colorModal);
+  focusOn(addColorModal);
 
-  const inputTitle = document.getElementById("index-add-color-modal-title");
+  const inputTitle = document.getElementById("add-color-modal-title");
 
   inputTitle.addEventListener("focus", showInputNotice);
   inputTitle.addEventListener("blur", hideInputNotice);
 
-  colorModal.classList.toggle("hide-add-modal");
+  addColorModal.classList.toggle("hide-add-modal");
 }
 
 function closeColorModal() {
   isColorModalShowing = false;
 
-  const inputTitle = document.getElementById("index-add-color-modal-title");
-  const inputColorCode = document.getElementById("index-add-color-modal-code");
+  const inputTitle = document.getElementById("add-color-modal-title");
+  const inputColorCode = document.getElementById("add-color-modal-code");
 
   inputTitle.value = "";
   inputColorCode.value = "";
@@ -355,18 +331,18 @@ function closeColorModal() {
 
   resetFocus();
 
-  colorModal.classList.toggle("hide-add-modal");
+  addColorModal.classList.toggle("hide-add-modal");
 }
 
 function showInputNotice() {
-  const inputNotice = document.querySelector(".index-add-color-modal-notice");
+  const inputNotice = document.querySelector(".add-color-modal-notice");
 
   inputNotice.classList.remove("hide");
   inputNotice.classList.add("show");
 }
 
 function hideInputNotice() {
-  const inputNotice = document.querySelector(".index-add-color-modal-notice");
+  const inputNotice = document.querySelector(".add-color-modal-notice");
 
   inputNotice.classList.remove("show");
   inputNotice.classList.add("hide");
