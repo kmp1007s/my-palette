@@ -29,11 +29,17 @@ input {
   background-color: #f2eef7;
   transition: all 0.2s;
   color: #3a4551;
+  text-align: center;
 }
 
 input:focus {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transform: scale(1.03);
+  border: none;
+}
+
+input::placeholder {
+  text-align: center;
 }
 
 a {
@@ -330,7 +336,8 @@ li {
 }
 
 .focus-out {
-  filter: brightness(0.4);
+  opacity: 0.4;
+  transition: opacity 0.5s;
 }
 
 .selected-nav {
