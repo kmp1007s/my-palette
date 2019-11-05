@@ -12,12 +12,6 @@
     <div class="bg3"></div>
     <h1 class="banner">MyPalette<strong> 마이팔레트</strong></h1>
     <div class="nav">
-      <!-- <button class="nav-item nav-code">
-        <svg>
-          <rect></rect>
-        </svg>
-        코드 모음
-      </button> -->
       <button class="nav-item nav-color">
         <svg>
           <rect></rect>
@@ -76,83 +70,32 @@
         <a class="add-txt" href="#">추가하기</a>
       </li>
     </ul>
-    <!-- <ul class="code-box-list hide-list">
-      <li class="color-box-item">
-        <div class="add-box">
-          <svg
-            version="1.1"
-            id="Capa_1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0px"
-            y="0px"
-            width="40px"
-            height="40px"
-            viewBox="0 0 510 510"
-            style="enable-background:new 0 0 510 510;"
-            xml:space="preserve"
-            class="add-icon"
-          >
-            <defs>
-              <linearGradient id="purpleGradient">
-                <stop offset="0%" stop-color="#7f53ac" />
-                <stop offset="74%" stop-color="#647dee" />
-              </linearGradient>
-            </defs>
-            <g>
-              <g id="add-circle">
-                <path
-                  d="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z M382.5,280.5h-102v102h-51v-102
-               h-102v-51h102v-102h51v102h102V280.5z"
-                />
-              </g>
-            </g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-            <g></g>
-          </svg>
-        </div>
-        <a class="add-txt" href="#">추가하기</a>
-      </li>
-    </ul> -->
-    <div class="add-color-modal hide-add-modal">
-      <h1 class="add-color-modal-banner">색상 추가</h1>
-      <a href="#" class="add-color-modal-close">닫기</a>
-      <div class="add-color-modal-title-div">
-        <div class="add-color-modal-notice">
+    <div class="add-modal hide-add-modal">
+      <h1 class="add-modal-banner">색상 추가</h1>
+      <a href="#" class="add-modal-close">닫기</a>
+      <div class="add-modal-title-div">
+        <div class="add-modal-notice hide-notice">
           ※ 색상 이름은 고유한 값이어야 합니다
         </div>
-        <span class="add-color-modal-span">색상 이름</span>
-        <input type="text" id="add-color-modal-title" placeholder="색상 이름" />
+        <span class="add-modal-span">색상 이름</span>
+        <input type="text" id="add-modal-title" placeholder="색상 이름" />
       </div>
-      <div class="add-color-modal-color-div">
-        <span class="add-color-modal-span">색상의 코드</span>
-        <input type="text" id="add-color-modal-code" placeholder="#aaaaaa" />
+      <div class="add-modal-color-div">
+        <span class="add-modal-span">색상의 코드</span>
+        <input type="text" id="add-modal-code" placeholder="#aaaaaa" />
       </div>
-      <div class="add-color-modal-save">
+      <div class="add-modal-save">
         <a href="#">저장</a>
       </div>
     </div>
-    <div class="update-color-modal hide-update-modal">
-      <h1 class="update-color-modal-banner">색상 수정</h1>
-      <div class="update-color-modal-old">
-        <div class="update-color-modal-circle"></div>
-        <span class="update-color-modal-title"></span>
-        <span class="update-color-modal-code"></span>
+    <div class="update-modal hide-update-modal">
+      <h1 class="update-modal-banner">색상 수정</h1>
+      <div class="update-modal-old">
+        <div class="update-modal-circle"></div>
+        <span class="update-modal-title"></span>
+        <span class="update-modal-code"></span>
       </div>
-      <div class="update-color-modal-arrow">
+      <div class="update-modal-arrow">
         <svg
           version="1.1"
           id="Layer_1"
@@ -193,30 +136,30 @@
           <g></g>
         </svg>
       </div>
-      <div class="update-color-modal-new">
-        <div class="update-color-modal-circle-new"></div>
-        <span class="update-color-modal-title-new"></span>
-        <span class="update-color-modal-code-new"></span>
+      <div class="update-modal-new">
+        <div class="update-modal-circle-new"></div>
+        <span class="update-modal-title-new"></span>
+        <span class="update-modal-code-new"></span>
         <div>
-          <span class="update-color-modal-span">색상 타이틀</span
+          <span class="update-modal-span">색상 타이틀</span
           ><input
             type="text"
-            class="update-color-modal-title-input"
+            id="update-modal-title-input"
             placeholder="색상 이름"
           />
         </div>
         <div>
-          <span class="update-color-modal-span">색상 코드</span
+          <span class="update-modal-span">색상 코드</span
           ><input
             type="text"
-            class="update-color-modal-code-input"
+            id="update-modal-code-input"
             placeholder="#aaaaaa"
           />
         </div>
       </div>
-      <div class="update-color-modal-btn-div">
-        <a class="update-color-modal-save" href="#">완료</a>
-        <a class="update-color-modal-cancel" href="#">취소</a>
+      <div class="update-modal-btn-div">
+        <a class="update-modal-save" href="#">완료</a>
+        <a class="update-modal-cancel" href="#">취소</a>
       </div>
     </div>
     <script src="js/index.js"></script>

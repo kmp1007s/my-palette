@@ -1,104 +1,112 @@
-let isColorModalShowing = false; //색상 추가 모달의 가시 여부
+let isAddModalOpen = false; //색상 추가 모달의 가시 여부
+let isUpdModalOpen = false; //색상 수정 모달의 가시 여부
 
-// const navCode = document.querySelector(".nav-code"); // 코드모음
 const navColor = document.querySelector(".nav-color"); // 색상모음
 
-const addColorModal = document.querySelector(".add-color-modal"); // 색상 추가 모달
-const updateColorModal = document.querySelector(".update-color-modal"); // 색상 업데이트 모달
+const lstColorParent = document.querySelector(".color-box-list"); // 리스트 감싸는 ul
 
-const lstCodeParent = document.querySelector(".code-box-list"); // 코드리스트 감싸는 ul
-const lstColorParent = document.querySelector(".color-box-list"); // 색상리스트 감싸는 ul
+const addModal = document.querySelector(".add-modal"); // 색상 추가 모달
+const updModal = document.querySelector(".update-modal"); // 색상 업데이트 모달
+
+const addTitleInput = document.getElementById("add-modal-title");
+const addCodeInput = document.getElementById("add-modal-code");
+
+const updOldCircle = document.querySelector(".update-modal-circle");
+const updOldTitle = document.querySelector(".update-modal-title");
+const updOldCode = document.querySelector(".update-modal-code");
+
+const updNewTitle = document.querySelector(".update-modal-title-new");
+const updNewCode = document.querySelector(".update-modal-code-new");
+const updNewCircle = document.querySelector(".update-modal-circle-new");
+
+const updTitleInput = document.getElementById("update-modal-title-input");
+const updCodeInput = document.getElementById("update-modal-code-input");
 
 window.addEventListener("load", windowLoaded);
 window.addEventListener("keyup", windowKeyUp);
 
 function windowKeyUp(e) {
-  if (isColorModalShowing) {
+  if (isAddModalOpen) {
     //ESC
-    if (e.keyCode == 27) closeColorModal();
+    if (e.keyCode == 27) closeAddModal();
+
     //Enter
     if (e.keyCode == 13) {
-      const title = document.getElementById("add-color-modal-title").value;
-      const colorCode = document.getElementById("add-color-modal-code").value;
+      const colorTitle = addTitleInput.value;
+      const colorCode = addCodeInput.value;
 
-      addNewColor(title, colorCode);
+      addNewColor(colorTitle, colorCode);
+    }
+  }
+
+  if (isUpdModalOpen) {
+    //ESC
+    if (e.keyCode == 27) closeUpdModal();
+
+    //Enter
+    if (e.keyCode == 13) {
+      const oldTitle = updOldTitle.innerHTML;
+      const newTitle = updTitleInput.value;
+      const newCode = updCodeInput.value;
+
+      updateColor(oldTitle, newTitle, newCode);
     }
   }
 }
 
 function windowLoaded(e) {
-  const addColorTxt = document.querySelector(".add-txt"); // 색상 추가 텍스트
+  const addColorTxt = document.querySelector(".add-txt"); // 색상 추가 텍스트 (추가하기)
   const addColorIcon = document.querySelector(".add-icon"); // 색상 추가 아이콘
 
-  const colorModalSaveBtn = document.querySelector(".add-color-modal-save"); // 색상 추가 버튼
-  const colorModalCloseBtn = document.querySelector(
+  const addModalSaveBtn = document.querySelector(".add-modal-save"); // 색상 추가 버튼
+  const addModalCloseBtn = document.querySelector(
     //색상 추가 모달 종료 버튼
-    ".add-color-modal-close"
+    ".add-modal-close"
   );
 
-  const updateColorModalSaveBtn = document.querySelector(
+  const updModalSaveBtn = document.querySelector(
     //색상 수정 모달 완료 버튼
-    ".update-color-modal-save"
+    ".update-modal-save"
   );
-  const updateColorModalCancelBtn = document.querySelector(
+  const updModalCloseBtn = document.querySelector(
     //색상 수정 모달 취소 버튼
-    ".update-color-modal-cancel"
-  );
-
-  const updateInputTitle = document.querySelector(
-    //업데이트 색상 타이틀
-    ".update-color-modal-title-input"
-  );
-  const updateInputCode = document.querySelector(
-    //업데이트 색상 코드
-    ".update-color-modal-code-input"
+    ".update-modal-cancel"
   );
 
   initUI();
 
-  // navCode.addEventListener("click", toggleColorOrCode);
-  // navColor.addEventListener("click", toggleColorOrCode);
+  addColorTxt.addEventListener("click", openAddModal);
+  addColorIcon.addEventListener("click", openAddModal);
 
-  addColorTxt.addEventListener("click", showColorModal);
-  addColorIcon.addEventListener("click", showColorModal);
+  addTitleInput.addEventListener("focus", showInputNotice);
+  addTitleInput.addEventListener("blur", hideInputNotice);
 
-  colorModalCloseBtn.addEventListener("click", closeColorModal);
+  addModalCloseBtn.addEventListener("click", closeAddModal);
+  addModalSaveBtn.addEventListener("click", e => {
+    const colorTitle = addTitleInput.value;
+    const colorCode = addCodeInput.value;
 
-  colorModalSaveBtn.addEventListener("click", e => {
-    const title = document.getElementById("add-color-modal-title").value;
-    const colorCode = document.getElementById("add-color-modal-code").value;
-
-    addNewColor(title, colorCode);
+    addNewColor(colorTitle, colorCode);
   });
 
-  updateInputTitle.addEventListener("keyup", e => {
-    const newTitle = document.querySelector(".update-color-modal-title-new");
-
-    newTitle.innerHTML = e.target.value;
+  updTitleInput.addEventListener("keyup", e => {
+    updNewTitle.innerHTML = e.target.value;
   });
 
-  updateInputCode.addEventListener("keyup", e => {
-    const newCircle = document.querySelector(".update-color-modal-circle-new");
-    const newCode = document.querySelector(".update-color-modal-code-new");
-
-    newCircle.style.backgroundColor = e.target.value;
-    newCode.innerHTML = e.target.value;
+  updCodeInput.addEventListener("keyup", e => {
+    updNewCircle.style.backgroundColor = e.target.value;
+    updNewCode.innerHTML = e.target.value;
   });
 
-  updateColorModalSaveBtn.addEventListener("click", e => {
-    const oldTitle = document.querySelector(".update-color-modal-title")
-      .innerHTML;
+  updModalSaveBtn.addEventListener("click", e => {
+    const oldTitle = updOldTitle.innerHTML;
+    const newTitle = updTitleInput.value;
+    const newCode = updCodeInput.value;
 
-    const newTitle = document.querySelector(".update-color-modal-title-input")
-      .value;
-
-    const newCode = document.querySelector(".update-color-modal-code-input")
-      .value;
-
-    updateColor(e, oldTitle, newTitle, newCode);
+    updateColor(oldTitle, newTitle, newCode);
   });
 
-  updateColorModalCancelBtn.addEventListener("click", hideColorUpdateModal);
+  updModalCloseBtn.addEventListener("click", closeUpdModal);
 }
 
 /* 처음 UI 로딩 시 애니메이션 효과를 주고 싶은 경우 HTML이 아니라 이 부분에 작성 */
@@ -107,37 +115,30 @@ function initUI() {
   loadColors();
 }
 
-// function toggleColorOrCode() {
-//   navColor.classList.toggle("selected-nav");
-//   navCode.classList.toggle("selected-nav");
-//   lstColorParent.classList.toggle("hide-list");
-//   lstCodeParent.classList.toggle("hide-list");
-// }
-
 function loadColors() {
-  let colors = [];
-  let keys = Object.keys(localStorage);
+  const colors = [];
+  const keys = Object.keys(localStorage);
 
-  //로컬 스토리지의 모든 값을 읽어들임
+  // 로컬 스토리지의 모든 값을 읽어들임
   for (let i = 0; i < localStorage.length; i++) {
     let colorTitle = keys[i];
     let colorCode = localStorage.getItem(keys[i]);
 
     let color = {
-      colorTitle: colorTitle,
-      colorCode: colorCode
+      colorTitle,
+      colorCode
     };
 
     colors.push(color);
   }
 
-  for (let i = 0; i < colors.length; i++) {
-    insertColor(colors[i].colorTitle, colors[i].colorCode);
+  for (let color of colors) {
+    insertColor(color.colorTitle, color.colorCode);
   }
 }
 
 function isColorCodeRight(colorCode) {
-  //컬러코드의 값은 길이가 7이면서 #이 포함되어야 함
+  // 컬러코드의 값은 길이가 7이면서 #이 포함되어야 함
   if (colorCode.length == 7 && colorCode.includes("#")) {
     return true;
   }
@@ -155,6 +156,8 @@ function isColorTitleExist(colorTitle) {
       return true;
     }
   }
+
+  return false;
 }
 
 function addNewColor(colorTitle, colorCode) {
@@ -164,11 +167,11 @@ function addNewColor(colorTitle, colorCode) {
       return;
     }
 
-    saveColorStorage(colorTitle, colorCode);
+    svColorStorage(colorTitle, colorCode);
     alert("저장되었습니다!");
 
     insertColor(colorTitle, colorCode);
-    closeColorModal();
+    closeAddModal();
 
     return;
   }
@@ -176,17 +179,17 @@ function addNewColor(colorTitle, colorCode) {
   return;
 }
 
-function saveColorStorage(colorTitle, colorCode) {
+function svColorStorage(colorTitle, colorCode) {
   localStorage.setItem(colorTitle, colorCode);
 }
 
-function removeColorStorage(colorTitle) {
+function rmColorStorage(colorTitle) {
   localStorage.removeItem(colorTitle);
 }
 
 function insertColor(colorTitle, colorCode) {
-  const newItem = createNewColor(colorTitle, colorCode);
-  lstColorParent.appendChild(newItem);
+  const newColor = createNewColor(colorTitle, colorCode);
+  lstColorParent.appendChild(newColor);
 }
 
 function createNewColor(colorTitle, colorCode) {
@@ -197,7 +200,7 @@ function createNewColor(colorTitle, colorCode) {
   newCircle.className = "color-box-item-circle";
   newCircle.style.backgroundColor = colorCode;
   newCircle.addEventListener("click", e => {
-    colorCircleClicked(e, colorCode);
+    circleClicked(colorCode);
   });
 
   const newTitle = document.createElement("div");
@@ -213,7 +216,7 @@ function createNewColor(colorTitle, colorCode) {
   newUpdateBtn.innerHTML = "수정";
   newUpdateBtn.className = "color-box-update-btn";
   newUpdateBtn.addEventListener("click", e => {
-    showUpdateColorModal(colorTitle, colorCode);
+    openUpdModal(colorTitle, colorCode);
   });
 
   const newDelBtn = document.createElement("a");
@@ -223,7 +226,7 @@ function createNewColor(colorTitle, colorCode) {
     const choice = confirm('"' + colorTitle + '"' + "을 삭제할까요?");
 
     if (choice) {
-      removeColor(e, colorTitle);
+      rmColor(colorTitle);
       alert(colorTitle + "을 삭제했습니다!");
     }
   });
@@ -240,41 +243,35 @@ function createNewColor(colorTitle, colorCode) {
   return newColor;
 }
 
-function showUpdateColorModal(colorTitle, colorCode) {
-  const oldTitle = document.querySelector(".update-color-modal-title");
-  const oldCode = document.querySelector(".update-color-modal-code");
-  const oldCircle = document.querySelector(".update-color-modal-circle");
+function openUpdModal(colorTitle, colorCode) {
+  isUpdModalOpen = true;
 
-  const newTitle = document.querySelector(".update-color-modal-title-new");
-  const newCode = document.querySelector(".update-color-modal-code-new");
-  const newCircle = document.querySelector(".update-color-modal-circle-new");
+  focusOn(updModal);
+  updModal.classList.toggle("hide-update-modal");
 
-  focusOn(updateColorModal);
-  updateColorModal.classList.toggle("hide-update-modal");
+  updOldTitle.innerHTML = colorTitle;
+  updOldCode.innerHTML = colorCode;
+  updOldCircle.style.backgroundColor = colorCode;
 
-  oldTitle.innerHTML = colorTitle;
-  oldCode.innerHTML = colorCode;
-  oldCircle.style.backgroundColor = colorCode;
-
-  newTitle.innerHTML = colorTitle;
-  newCode.innerHTML = colorCode;
-  newCircle.style.backgroundColor = colorCode;
+  updNewTitle.innerHTML = colorTitle;
+  updNewCode.innerHTML = colorCode;
+  updNewCircle.style.backgroundColor = colorCode;
 }
 
-function updateColor(e, oldTitle, newTitle, newCode) {
+function updateColor(oldTitle, newTitle, newCode) {
   if (isColorCodeRight(newCode)) {
     if (isColorTitleExist(newTitle)) {
       alert("이미 존재하는 색상입니다");
       return;
     }
 
-    removeColorStorage(oldTitle);
-    removeColor(e, oldTitle);
-    saveColorStorage(newTitle, newCode);
+    rmColorStorage(oldTitle);
+    rmColor(oldTitle);
+    svColorStorage(newTitle, newCode);
     insertColor(newTitle, newCode);
 
     alert("수정되었습니다");
-    hideColorUpdateModal();
+    closeUpdModal();
 
     return;
   }
@@ -283,69 +280,59 @@ function updateColor(e, oldTitle, newTitle, newCode) {
   return;
 }
 
-function hideColorUpdateModal() {
-  const inputTitle = document.querySelector(".update-color-modal-title-input");
-  const inputCode = document.querySelector(".update-color-modal-code-input");
+function closeUpdModal() {
+  isUpdModalOpen = false;
 
-  inputTitle.value = "";
-  inputCode.value = "";
+  updTitleInput.value = "";
+  updCodeInput.value = "";
 
-  updateColorModal.classList.add("hide-update-modal");
+  updModal.classList.add("hide-update-modal");
   resetFocus();
 }
 
-function removeColor(e, colorTitle) {
+function rmColor(colorTitle) {
   const lstColor = lstColorParent.children;
 
   for (let i = 1; i < lstColor.length; i++) {
-    const existColorTitle = lstColor[i].children[1].innerHTML;
+    let existColorTitle = lstColor[i].children[1].innerHTML;
 
     if (colorTitle == existColorTitle) {
-      removeColorStorage(colorTitle);
+      rmColorStorage(colorTitle);
       lstColorParent.removeChild(lstColor[i]);
     }
   }
 }
 
-function showColorModal() {
-  isColorModalShowing = true;
-  focusOn(addColorModal);
-
-  const inputTitle = document.getElementById("add-color-modal-title");
-
-  inputTitle.addEventListener("focus", showInputNotice);
-  inputTitle.addEventListener("blur", hideInputNotice);
-
-  addColorModal.classList.toggle("hide-add-modal");
+function openAddModal() {
+  isAddModalOpen = true;
+  focusOn(addModal);
+  addModal.classList.toggle("hide-add-modal");
 }
 
-function closeColorModal() {
-  isColorModalShowing = false;
+function closeAddModal() {
+  isAddModalOpen = false;
 
-  const inputTitle = document.getElementById("add-color-modal-title");
-  const inputColorCode = document.getElementById("add-color-modal-code");
+  addTitleInput.value = "";
+  addCodeInput.value = "";
 
-  inputTitle.value = "";
-  inputColorCode.value = "";
   hideInputNotice();
-
   resetFocus();
 
-  addColorModal.classList.toggle("hide-add-modal");
+  addModal.classList.toggle("hide-add-modal");
 }
 
 function showInputNotice() {
-  const inputNotice = document.querySelector(".add-color-modal-notice");
+  const inputNotice = document.querySelector(".add-modal-notice");
 
-  inputNotice.classList.remove("hide");
-  inputNotice.classList.add("show");
+  inputNotice.classList.remove("hide-notice");
+  inputNotice.classList.add("show-notice");
 }
 
 function hideInputNotice() {
-  const inputNotice = document.querySelector(".add-color-modal-notice");
+  const inputNotice = document.querySelector(".add-modal-notice");
 
-  inputNotice.classList.remove("show");
-  inputNotice.classList.add("hide");
+  inputNotice.classList.remove("show-notice");
+  inputNotice.classList.add("hide-notice");
 }
 
 function focusOn(targetEl) {
@@ -367,7 +354,7 @@ function resetFocus() {
   }
 }
 
-function colorCircleClicked(e, colorCode) {
+function circleClicked(colorCode) {
   copyToClipboard(colorCode);
   alert(colorCode + " Copied!");
 }

@@ -114,10 +114,10 @@ li {
   stroke-linecap: round;
 }
 
-/* .nav-item:hover svg rect {
+.nav-item:hover svg rect {
   stroke-dasharray: 500;
   animation: dash 1s ease-in alternate infinite;
-} */
+}
 
 .bg {
   position: absolute;
@@ -223,6 +223,8 @@ li {
   letter-spacing: 2px;
   font-weight: 200;
   margin-bottom: 7px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
 }
 
 .color-box-update-btn {
@@ -239,7 +241,7 @@ li {
   border-radius: 50%;
 }
 
-.add-color-modal {
+.add-modal {
   width: 30%;
   position: absolute;
   background-color: #f2eef7;
@@ -258,19 +260,19 @@ li {
   overflow: hidden;
 }
 
-.add-color-modal-title-div {
+.add-modal-title-div {
   position: absolute;
   top: 42%;
   margin: 30px;
 }
 
-.add-color-modal-color-div {
+.add-modal-color-div {
   position: absolute;
   top: 55%;
   margin: 30px;
 }
 
-.add-color-modal-span {
+.add-modal-span {
   display: inline-block;
   width: 120px;
   text-align: left;
@@ -278,29 +280,29 @@ li {
   font-weight: 200;
 }
 
-.add-color-modal-title,
-.add-color-modal-code {
+.add-modal-title,
+.add-modal-code {
   vertical-align: middle;
 }
 
-.add-color-modal-close {
+.add-modal-close {
   position: absolute;
   right: 5%;
   top: 5%;
 }
 
-.add-color-modal-save {
+.add-modal-save {
   position: absolute;
   bottom: 5%;
 }
 
-.add-color-modal-banner {
+.add-modal-banner {
   color: #3a4551;
   position: absolute;
   top: 10%;
 }
 
-.add-color-modal-notice {
+.add-modal-notice {
   display: block;
   position: absolute;
   border-radius: 6px;
@@ -326,12 +328,12 @@ li {
   cursor: pointer;
 }
 
-.show {
+.show-notice {
   opacity: 1;
   transition: opacity 0.2s;
 }
 
-.hide {
+.hide-notice {
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -354,13 +356,12 @@ li {
 .hide-add-modal {
   opacity: 0;
   height: 0;
-  /* display: none; For Use Folding Animation, Comment this line */
   transition: all 0.2s;
   width: 45%;
   visibility: hidden;
 }
 
-.update-color-modal {
+.update-modal {
   position: absolute;
   width: 50%;
   height: 50%;
@@ -380,7 +381,7 @@ li {
   overflow: hidden;
 }
 
-.update-color-modal-old {
+.update-modal-old {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -389,7 +390,7 @@ li {
   top: 40%;
 }
 
-.update-color-modal-arrow {
+.update-modal-arrow {
   width: 5%;
   height: 5%;
   position: absolute;
@@ -406,7 +407,7 @@ li {
   fill-opacity: 1;
 }
 
-.update-color-modal-new {
+.update-modal-new {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -415,7 +416,7 @@ li {
   top: 40%;
 }
 
-.update-color-modal-banner {
+.update-modal-banner {
   position: relative;
   text-align: center;
   color: #f2eef7;
@@ -425,26 +426,26 @@ li {
   padding-bottom: 50px;
 }
 
-.update-color-modal-btn-div {
+.update-modal-btn-div {
   position: absolute;
   top: 80%;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.update-color-modal-save,
-.update-color-modal-cancel {
+.update-modal-save,
+.update-modal-cancel {
   color: #f2eef7;
   -webkit-text-fill-color: #f2eef7;
   text-decoration: underline;
 }
 
-.update-color-modal-save {
+.update-modal-save {
   margin-right: 10px;
 }
 
-.update-color-modal-circle,
-.update-color-modal-circle-new {
+.update-modal-circle,
+.update-modal-circle-new {
   width: 100px;
   height: 100px;
   background-color: #f2eef7;
@@ -453,14 +454,14 @@ li {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.update-color-modal-title,
-.update-color-modal-title-new {
+.update-modal-title,
+.update-modal-title-new {
   display: inline-block;
   margin-bottom: 10px;
 }
 
-.update-color-modal-code,
-.update-color-modal-code-new {
+.update-modal-code,
+.update-modal-code-new {
   display: inline-block;
   margin-bottom: 30px;
   letter-spacing: 2px;
@@ -477,7 +478,7 @@ li {
   visibility: none;
 }
 
-.update-color-modal-span {
+.update-modal-span {
   display: inline-block;
   width: 100px;
 }
@@ -494,14 +495,14 @@ li {
   }
 }
 
-/* @keyframes dash {
+@keyframes dash {
   from {
     stroke-dashoffset: 500;
   }
   to {
     stroke-dashoffset: 0;
   }
-} */
+}
 
 @keyframes strokeFillAni {
   100% {
